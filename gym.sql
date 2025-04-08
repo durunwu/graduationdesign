@@ -296,14 +296,53 @@ CREATE TABLE `subject` (
   `subId` int(20) NOT NULL AUTO_INCREMENT,
   `subname` varchar(20) DEFAULT NULL,
   `sellingPrice` double DEFAULT NULL,
+  `roomMax` double DEFAULT NULL,
   PRIMARY KEY (`subId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of subject
 -- ----------------------------
-INSERT INTO `subject` VALUES ('1', '健身球', '30');
-INSERT INTO `subject` VALUES ('2', '跑步机', '35');
-INSERT INTO `subject` VALUES ('4', '压力车', '50');
-INSERT INTO `subject` VALUES ('5', '仰卧起坐', '20');
-INSERT INTO `subject` VALUES ('6', '健身操', '50');
+INSERT INTO `subject` VALUES ('1', '普拉提', '100', '20');
+INSERT INTO `subject` VALUES ('2', '跑步机', '35', '10');
+INSERT INTO `subject` VALUES ('4', '动感单车', '80', '15');
+INSERT INTO `subject` VALUES ('5', '力量训练(私教)', '100', '1');
+INSERT INTO `subject` VALUES ('6', '健身操', '50', '20');
+INSERT INTO `subject` VALUES ('6', '瑜伽', '100', '20');
+INSERT INTO `subject` VALUES ('6', '健身操', '80', '20');
+
+
+DROP TABLE IF EXISTS `subject_reservation`;
+CREATE TABLE `subject_reservation` (
+   `subId` int(20) NOT NULL AUTO_INCREMENT,
+   `subname` varchar(20) DEFAULT NULL,
+   `sellingPrice` double DEFAULT NULL,
+   `subjectContainNum` double DEFAULT NULL,
+   `alreadyReservationNum` double DEFAULT 0,
+   PRIMARY KEY (`subId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+INSERT INTO `subject_reservation` VALUES ('1', '普拉提', '100', '15',0);
+INSERT INTO `subject_reservation` VALUES ('2', '跑步机', '35', '10',0);
+INSERT INTO `subject_reservation` VALUES ('4', '动感单车', '80', '15',0);
+INSERT INTO `subject_reservation` VALUES ('5', '力量训练', '100', '1',0);
+INSERT INTO `subject_reservation` VALUES ('6', '健身操', '50', '15',0);
+INSERT INTO `subject_reservation` VALUES ('7', '瑜伽', '100', '15',0);
+
+INSERT INTO `subject_reservation` VALUES ('1', '普拉提', '100', '15',0),
+('2', '跑步机', '35', '10',0),
+('4', '动感单车', '80', '15',0),
+('5', '力量训练', '100', '1',0),
+('6', '健身操', '50', '15',0),
+('7', '瑜伽', '100', '15',0);
+
+
+DROP TABLE IF EXISTS `user_reservation`;
+CREATE TABLE `user_reservation` (
+   `subId` int(20) NOT NULL AUTO_INCREMENT,
+   `adminId` int(20) NOT NULL,
+   `subname` varchar(20) DEFAULT NULL,
+   `reservation_start_time` datetime DEFAULT NULL DEFAULT NULL,
+   `reservation_end_time` datetime DEFAULT NULL DEFAULT NULL,
+   PRIMARY KEY (`subId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;

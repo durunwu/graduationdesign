@@ -4,6 +4,8 @@ package com.liujian.gymxmjpa.controller;
 
 import com.liujian.gymxmjpa.dao.AdminuserDao;
 import com.liujian.gymxmjpa.entity.Adminuser;
+import com.liujian.gymxmjpa.util.ThreadLocalHolder;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -23,6 +25,7 @@ import java.util.regex.Pattern;
  * @Author: LiuJian
  * @Date: 2020/4/4
  */
+@Slf4j
 @Controller
 @RequestMapping("/")
 public class AdminuserConntroller {
@@ -53,6 +56,9 @@ public class AdminuserConntroller {
             subject.login(userToken);
             Adminuser a= adminuserDao.findByAdminNameAndAdminPassword(username,DigestUtils.md5Hex(password));
             httpSession.setAttribute("user",a);
+
+            // 登录成功后，将当前用户信息存入ThreadLocal中
+            ThreadLocalHolder.setCurrentUser(a);
             if (type.equals("members")) {
                 //会员
                 path = "WEB-INF/jsp/members_index";
@@ -88,7 +94,6 @@ public class AdminuserConntroller {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return "redirect:/login";
-
     }
 
     /**

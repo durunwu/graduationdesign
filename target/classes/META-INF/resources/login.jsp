@@ -16,7 +16,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/HTmoban/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/HTmoban/js/xadmin.js"></script>
-
+<%--    <script src="https://cdn.staticfile.org/layui/2.6.8/layui.min.js"></script>--%>
+<%--    <script>--%>
+<%--        layui.use('form', function(){--%>
+<%--            var form = layui.form;--%>
+<%--            form.render(); // 渲染表单元素--%>
+<%--        });--%>
+<%--    </script>--%>
 </head>
 <body class="login-bg">
     
@@ -27,6 +33,7 @@
         <form method="post" class="layui-form" action="${pageContext.request.contextPath}/dl/yz">
             <span style="color: red;">${msg}</span>
             <span style="color: red;">${msg}</span>
+
             <select name="type" lay-verify="required" class="layui-input">
                 <option >请选择用户类型</option>
                 <option value="members">会员</option>

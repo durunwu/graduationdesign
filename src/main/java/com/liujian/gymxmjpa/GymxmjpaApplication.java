@@ -1,5 +1,6 @@
 package com.liujian.gymxmjpa;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Author: LiuJian
  * @Date: 2020/4/1
  */
+@MapperScan("com.liujian.gymxmjpa.mapper")
 @SpringBootApplication
 public class GymxmjpaApplication {
 

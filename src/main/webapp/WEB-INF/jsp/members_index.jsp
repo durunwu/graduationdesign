@@ -107,34 +107,34 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>教练管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="${pageContext.request.contextPath}/coach/jin3">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>教练列表</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="${pageContext.request.contextPath}/privateinfo/jin3">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员私教课程列表</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="${pageContext.request.contextPath}/menber/jin4">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员私教详情</cite>
+<%--            <li>--%>
+<%--                <a href="javascript:;">--%>
+<%--                    <i class="iconfont">&#xe723;</i>--%>
+<%--                    <cite>教练管理</cite>--%>
+<%--                    <i class="iconfont nav_right">&#xe697;</i>--%>
+<%--                </a>--%>
+<%--                <ul class="sub-menu">--%>
+<%--                    <li>--%>
+<%--                        <a _href="${pageContext.request.contextPath}/coach/jin3">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>教练列表</cite>--%>
+<%--                        </a>--%>
+<%--                    </li >--%>
+<%--                    <li>--%>
+<%--                        <a _href="${pageContext.request.contextPath}/privateinfo/jin3">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>会员私教课程列表</cite>--%>
+<%--                        </a>--%>
+<%--                    </li >--%>
+<%--                    <li>--%>
+<%--                        <a _href="${pageContext.request.contextPath}/menber/jin4">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>会员私教详情</cite>--%>
 
-                        </a>
-                    </li>
-                </ul>
-            </li>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </li>--%>
 
             <li>
                 <a href="javascript:;">
@@ -144,12 +144,26 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="${pageContext.request.contextPath}/subject/jin7">
+                        <a _href="${pageContext.request.contextPath}/subject/jin8">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>课程列表</cite>
+                            <cite>课程预约</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="${pageContext.request.contextPath}/subject/jin9">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>已预约管理</cite>
                         </a>
                     </li >
                 </ul>
+<%--                <ul class="sub-menu">--%>
+<%--                    <li>--%>
+<%--                        <a _href="${pageContext.request.contextPath}/subject/jin7">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>课程列表</cite>--%>
+<%--                        </a>--%>
+<%--                    </li >--%>
+<%--                </ul>--%>
             </li>
             <li>
                 <a href="javascript:;">

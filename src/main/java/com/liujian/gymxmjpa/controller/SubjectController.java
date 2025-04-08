@@ -1,15 +1,21 @@
 package com.liujian.gymxmjpa.controller;
 
 import com.liujian.gymxmjpa.dao.PrivateCoachInfoDao;
+import com.liujian.gymxmjpa.dao.ReservationSubjectDao;
 import com.liujian.gymxmjpa.dao.SubjectDao;
+import com.liujian.gymxmjpa.entity.*;
 import com.liujian.gymxmjpa.service.SubjectDaoImpl;
-import com.liujian.gymxmjpa.entity.PrivateCoachInfo;
-import com.liujian.gymxmjpa.entity.Subject;
+import com.liujian.gymxmjpa.service.UserReservationService;
+import com.liujian.gymxmjpa.util.ThreadLocalHolder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +27,7 @@ import java.util.Optional;
  * @Author: LiuJian
  * @Date: 2020/4/8
  */
+@Slf4j
 @Controller
 @RequestMapping("/subject")
 public class SubjectController {
@@ -28,6 +35,8 @@ public class SubjectController {
    private SubjectDaoImpl subjectDaoImpl;
    @Autowired
    private SubjectDao subjectDao;
+   @Resource
+   private ReservationSubjectDao reservationSubjectDao;
    @Autowired
    private PrivateCoachInfoDao privateCoachInfoDao;
 
@@ -43,6 +52,32 @@ public class SubjectController {
     }
 
     /**
+     * @Description: 课程管理-课程预约
+     * @return
+     */
+    @RequestMapping("/jin8")
+    public String jin8(){
+        return "WEB-INF/jsp/members_subject";
+    }
+
+    /**
+     * @Description: 课程管理-预约管理
+     * @return
+     */
+    @RequestMapping("/jin9")
+    public String jin9(){
+        return "WEB-INF/jsp/reservation_subject";
+    }
+
+    @RequestMapping("/getUser")
+    @ResponseBody
+    public String getUser(HttpSession httpSession){
+        Adminuser adminuser=(Adminuser) httpSession.getAttribute("user");
+        log.info("获取当前用户 =>"+adminuser.getAdminName());
+        return adminuser.getAdminName();
+    }
+
+    /**
      * @Description: 课程管理-根据课程名称分页查询
      * @Author: LiuJian
      * @Date: 2020/4/8
@@ -55,6 +90,30 @@ public class SubjectController {
         map1.put("qi",(pageNumber-1)*pageSize);
         map1.put("shi",pageSize);
         return subjectDaoImpl.query(map1);
+    }
+
+    @RequestMapping("/subjectReservationQuery")
+    @ResponseBody
+    public Map<String,Object> subjectReservationQuery(String subname, int pageSize, int pageNumber){
+        Map<String,Object> map1=new HashMap<String,Object>();
+        map1.put("subname",subname);
+        map1.put("qi",(pageNumber-1)*pageSize);
+        map1.put("shi",pageSize);
+        return subjectDaoImpl.subjectReservationQuery(map1);
+    }
+
+    @Resource
+    UserReservationService userReservationService;
+
+    /**
+     * 保存预约课程
+     */
+    @RequestMapping("/saveReservation")
+    public void saveReservation(@RequestBody UserReservation userReservation,HttpSession httpSession){
+        log.info("预约课程 =>"+userReservation.getSubname());
+        Adminuser adminuser=(Adminuser) httpSession.getAttribute("user");
+        userReservation.setAdminId(adminuser.getAdminId());
+        userReservationService.save(userReservation);
     }
 
     /**
@@ -104,6 +163,12 @@ public class SubjectController {
     @ResponseBody
     public Optional<Subject> one(long subId){
         return subjectDao.findById(subId);
+    }
+
+    @RequestMapping("/getReservationSubjectById")
+    @ResponseBody
+    public Optional<ReservationSubject> getReservationSubjectById(long subId){
+        return reservationSubjectDao.findById(subId);
     }
 
     /**
