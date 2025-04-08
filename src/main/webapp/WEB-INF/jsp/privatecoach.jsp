@@ -480,7 +480,7 @@
 
     </script>
 </head>
-<body background="${pageContext.request.contextPath}/static/HTmoban/images/tongji4.jpg">
+<body>
     <%--    //查询--%>
     <div class="panel panel-default">
     <div class="panel-body">

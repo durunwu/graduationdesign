@@ -20,7 +20,8 @@ body{
 }
 .login-bg{
     /*background: #eeeeee url() 0 0 no-repeat;*/
-     background:url(../images/loginbg.gif) no-repeat center;
+    /* background:url(../images/loginbg.gif) no-repeat center;*/
+     background:url(../../mark/loginbj.gif) no-repeat center;
     background-size: cover;
     overflow: hidden;
 }
