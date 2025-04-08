@@ -26,6 +26,14 @@
         
         <form method="post" class="layui-form" action="${pageContext.request.contextPath}/dl/yz">
             <span style="color: red;">${msg}</span>
+            <span style="color: red;">${msg}</span>
+            <select name="type" lay-verify="required" class="layui-input">
+                <option >请选择用户类型</option>
+                <option value="members">会员</option>
+                <option value="coaches">教练</option>
+                <option value="administrators">管理员</option>
+            </select>
+            <hr class="hr15">
             <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">

@@ -45,21 +45,30 @@ public class AdminuserConntroller {
      * @Date: 2020/4/4
      */
     @RequestMapping("/dl/yz")
-    public String login(String username, String password,HttpSession httpSession,Model model){
-
-
+    public String login(String type, String username, String password,HttpSession httpSession,Model model){
         Subject subject= SecurityUtils.getSubject();
         UsernamePasswordToken userToken=new UsernamePasswordToken(username,DigestUtils.md5Hex(password));
+        String path = "";
         try{
             subject.login(userToken);
             Adminuser a= adminuserDao.findByAdminNameAndAdminPassword(username,DigestUtils.md5Hex(password));
             httpSession.setAttribute("user",a);
-            return "WEB-INF/jsp/index";
+            if (type.equals("members")) {
+                //会员
+                path = "WEB-INF/jsp/members_index";
+            } else if (type.equals("coaches")) {
+                //教练
+                path = "WEB-INF/jsp/coaches_index";
+            } else if (type.equals("administrators")) {
+                //管理员
+                path = "WEB-INF/jsp/index";
+            }
         }catch (UnknownAccountException e){
             model.addAttribute("msg","用户名或密码错误,请重新输入");
             return "login";
         }
 
+        return path;
         /*Adminuser a= adminuserDao.findByAdminNameAndAdminmima(username,password);
         if(a!=null){
             httpSession.setAttribute("user",a);
