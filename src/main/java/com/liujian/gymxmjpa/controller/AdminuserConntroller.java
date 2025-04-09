@@ -119,6 +119,11 @@ public class AdminuserConntroller {
         return "WEB-INF/jsp/updPassword";
     }
 
+    @RequestMapping("/register")
+    public String register(){
+        return "WEB-INF/jsp/register";
+    }
+
 
     /**
      * @Description: 修改密码
@@ -148,6 +153,26 @@ public class AdminuserConntroller {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
        return "redirect:/login.jsp";
+    }
+
+    @RequestMapping("/user/register")
+    public String register(String username,String newPassword,String newPasswordAgain,String type,HttpSession httpSession,Model model){
+        log.info("注册用户名:"+username+"密码:"+newPassword+"确认密码:"+newPasswordAgain+"权限:"+type);
+        Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!.%*#?&])[A-Za-z\\d$@$!.%*#?&]{8,}$");
+        Matcher m = p.matcher(newPassword);
+        if(!m.matches()){
+            model.addAttribute("msg","新密码最少为8位并为字母+数字+特殊字符");
+            return "WEB-INF/jsp/register";
+        }
+        if(!newPassword.equals(newPasswordAgain)){
+            model.addAttribute("msg","两次输入新密码不一致,请重新输入");
+            return "WEB-INF/jsp/register";
+        }
+        adminuserDao.createUser(username, DigestUtils.md5Hex(newPassword),type);
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        log.info("注册成功");
+        return "redirect:/login.jsp";
     }
 
 

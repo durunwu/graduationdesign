@@ -16,6 +16,7 @@ import com.liujian.gymxmjpa.mapper.UserReservationMapper;
 import com.liujian.gymxmjpa.service.SubjectDaoImpl;
 import com.liujian.gymxmjpa.service.SubjectReservationService;
 import com.liujian.gymxmjpa.service.UserReservationService;
+import com.liujian.gymxmjpa.util.CustomException;
 import com.liujian.gymxmjpa.util.ThreadLocalHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,10 +179,7 @@ public class SubjectController {
         log.info("已预约人数:{}",alreadyNum);
         if (alreadyNum >= max) {
             log.info("当前时段课程已约满");
-            throw new RuntimeException("当前课程已约满");
-        } else if (alreadyNum == null) {
-            log.info("当前时段课程已约满");
-            throw new RuntimeException("当前课程已约满");
+            throw new CustomException(999,"当前课程已约满");
         }
         userReservationService.save(userReservation);
         //更新已预约人数

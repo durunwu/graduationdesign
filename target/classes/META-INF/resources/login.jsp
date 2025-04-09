@@ -47,7 +47,8 @@
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
-
+            <!-- 添加用户注册链接 -->
+            <a href="${pageContext.request.contextPath}/register">用户注册</a>
            <%-- <input class="layui-input" type="checkbox" name="ckbox">记住我--%>
         </form>
     </div>

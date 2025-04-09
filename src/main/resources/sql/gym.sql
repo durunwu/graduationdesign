@@ -83,29 +83,30 @@ INSERT INTO `chongzhi` VALUES ('88', '37', null, '1000', '1000', '0', '2020-05-0
 -- ----------------------------
 DROP TABLE IF EXISTS `coach`;
 CREATE TABLE `coach` (
-  `coachId` int(20) NOT NULL AUTO_INCREMENT,
-  `coachName` varchar(20) DEFAULT NULL,
-  `coachPhone` varchar(50) DEFAULT NULL,
-  `coachSex` int(10) DEFAULT NULL,
-  `CoachAge` int(10) DEFAULT NULL,
-  `CoachData` date DEFAULT NULL,
-  `Teach` int(10) DEFAULT NULL,
-  `CoachWages` double DEFAULT NULL,
-  `CoachAddress` varchar(100) DEFAULT NULL,
-  `CoachStatic` int(11) DEFAULT '0',
-  PRIMARY KEY (`coachId`)
+ `coachId` int(20) NOT NULL AUTO_INCREMENT,
+ `adminid` int(20) DEFAULT NULL,
+ `coachName` varchar(20) DEFAULT NULL,
+ `coachPhone` varchar(50) DEFAULT NULL,
+ `coachSex` int(10) DEFAULT NULL,
+ `CoachAge` int(10) DEFAULT NULL,
+ `CoachData` date DEFAULT NULL,
+ `Teach` int(10) DEFAULT NULL,
+ `CoachWages` double DEFAULT NULL,
+ `CoachAddress` varchar(100) DEFAULT NULL,
+ `CoachStatic` int(11) DEFAULT '0',
+ PRIMARY KEY (`coachId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of coach
 -- ----------------------------
-INSERT INTO `coach` VALUES ('2', '张起灵', '13243253432', '0', '22', '2019-08-02', '2', '6000', '张家古楼', '0');
-INSERT INTO `coach` VALUES ('3', '蓝忘机', '13324332344', '0', '20', '2019-08-02', '2', '10000', '云深不知处', '0');
-INSERT INTO `coach` VALUES ('4', '花城', '13324245453', '1', '25', '2020-04-10', '3', '12000', '仙乐国', '0');
-INSERT INTO `coach` VALUES ('11', '婉儿', '13342244112', '1', '18', '2020-05-01', '2', '16500', '长留', '1');
-INSERT INTO `coach` VALUES ('12', '白凤九', '13433324335', '1', '20', '2019-10-04', '1', '18000', '青丘', '2');
-INSERT INTO `coach` VALUES ('14', '张含', '15299985622', '1', '35', '2020-04-02', '5', '10000', '北京丰台', '1');
-INSERT INTO `coach` VALUES ('16', '周命', '15785456231', '1', '22', '2020-05-06', '2', '12000', '陕西西安', '0');
+INSERT INTO `coach` VALUES ('2',  0,'张起灵', '13243253432', '0', '22', '2019-08-02', '2', '6000', '张家古楼', '0');
+INSERT INTO `coach` VALUES ('3',  0,'蓝忘机', '13324332344', '0', '20', '2019-08-02', '2', '10000', '云深不知处', '0');
+INSERT INTO `coach` VALUES ('4',  0,'花城', '13324245453', '1', '25', '2020-04-10', '3', '12000', '仙乐国', '0');
+INSERT INTO `coach` VALUES ('11', 0, '婉儿', '13342244112', '1', '18', '2020-05-01', '2', '16500', '长留', '1');
+INSERT INTO `coach` VALUES ('12', 0, '白凤九', '13433324335', '1', '20', '2019-10-04', '1', '18000', '青丘', '2');
+INSERT INTO `coach` VALUES ('14', 0, '张含', '15299985622', '1', '35', '2020-04-02', '5', '10000', '北京丰台', '1');
+INSERT INTO `coach` VALUES ('16', 0, '周命', '15785456231', '1', '22', '2020-05-06', '2', '12000', '陕西西安', '0');
 
 -- ----------------------------
 -- Table structure for equipment
@@ -204,8 +205,10 @@ INSERT INTO `loos` VALUES ('8', '包', '1', '门口', '2020-05-02 00:00:00', '0'
 -- Table structure for member
 -- ----------------------------
 DROP TABLE IF EXISTS `member`;
+
 CREATE TABLE `member` (
   `MemberId` int(20) NOT NULL AUTO_INCREMENT,
+  `adminid` int(20) DEFAULT NULL,
   `MemberName` varchar(20) DEFAULT NULL,
   `MemberPhone` varchar(20) DEFAULT NULL,
   `MemberSex` int(10) DEFAULT NULL,
@@ -220,20 +223,19 @@ CREATE TABLE `member` (
   KEY `fk-member-membertype` (`MemberTypes`),
   CONSTRAINT `fk-member-membertype` FOREIGN KEY (`MemberTypes`) REFERENCES `membertype` (`TypeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
-
 -- ----------------------------
 -- Records of member
 -- ----------------------------
-INSERT INTO `member` VALUES ('25', '刘建', '13456789087', '1', '23', '3', '2020-04-06', '08-24', '1', '390', '2021-05-03');
-INSERT INTO `member` VALUES ('26', 'Tom', '15266668585', '1', '24', '2', '2020-04-06', '08-07', '1', '-5', '2020-06-02');
-INSERT INTO `member` VALUES ('34', '王泽明', '17858966255', '1', '19', '5', '2020-04-06', '05-08', '2', '820', '2020-04-10');
-INSERT INTO `member` VALUES ('35', '张红', '18799256874', '0', '23', '1', '2020-04-07', '04-08', '1', '-7', '2020-08-31');
-INSERT INTO `member` VALUES ('37', '王芳', '15299950487', '0', '22', '3', '2020-04-07', '04-21', '1', '990', '2021-08-01');
-INSERT INTO `member` VALUES ('38', '李明', '15699588547', '1', '22', '3', '2020-04-07', '04-21', '1', '0', '2021-05-03');
-INSERT INTO `member` VALUES ('42', 'jerry', '15266528547', '1', '25', '2', '2020-04-08', '04-08', '1', '-7', '2020-06-02');
-INSERT INTO `member` VALUES ('43', '方蓝', '13456789876', '0', '22', '5', '2020-04-10', '04-29', '1', '0', '2020-05-10');
-INSERT INTO `member` VALUES ('44', '赵静', '15288888888', '0', '25', '3', '2020-04-12', '04-22', '1', '0', '2021-05-03');
-INSERT INTO `member` VALUES ('45', '孙戏', '18566584785', '1', '35', '3', '2020-05-03', '05-03', '1', '-2', '2021-05-03');
+INSERT INTO `member` VALUES ('25', 0,'刘建', '13456789087', '1', '23', '3', '2020-04-06', '08-24', '1', '390', '2021-05-03');
+INSERT INTO `member` VALUES ('26', 0,'Tom', '15266668585', '1', '24', '2', '2020-04-06', '08-07', '1', '-5', '2020-06-02');
+INSERT INTO `member` VALUES ('34', 0,'王泽明', '17858966255', '1', '19', '5', '2020-04-06', '05-08', '2', '820', '2020-04-10');
+INSERT INTO `member` VALUES ('35', 0,'张红', '18799256874', '0', '23', '1', '2020-04-07', '04-08', '1', '-7', '2020-08-31');
+INSERT INTO `member` VALUES ('37', 0,'王芳', '15299950487', '0', '22', '3', '2020-04-07', '04-21', '1', '990', '2021-08-01');
+INSERT INTO `member` VALUES ('38', 0,'李明', '15699588547', '1', '22', '3', '2020-04-07', '04-21', '1', '0', '2021-05-03');
+INSERT INTO `member` VALUES ('42', 0,'jerry', '15266528547', '1', '25', '2', '2020-04-08', '04-08', '1', '-7', '2020-06-02');
+INSERT INTO `member` VALUES ('43', 0,'方蓝', '13456789876', '0', '22', '5', '2020-04-10', '04-29', '1', '0', '2020-05-10');
+INSERT INTO `member` VALUES ('44', 0,'赵静', '15288888888', '0', '25', '3', '2020-04-12', '04-22', '1', '0', '2021-05-03');
+INSERT INTO `member` VALUES ('45', 0,'孙戏', '18566584785', '1', '35', '3', '2020-05-03', '05-03', '1', '-2', '2021-05-03');
 
 -- ----------------------------
 -- Table structure for membertype
@@ -331,15 +333,6 @@ INSERT INTO `subject_reservation` VALUES ('5', '力量训练', '100', '1',0);
 INSERT INTO `subject_reservation` VALUES ('6', '健身操', '50', '15',0);
 INSERT INTO `subject_reservation` VALUES ('7', '瑜伽', '100', '15',0);
 
-INSERT INTO `subject_reservation` VALUES ('1', '普拉提', '100', '15',0),
-('2', '跑步机', '35', '10',0),
-('4', '动感单车', '80', '15',0),
-('5', '力量训练', '100', '1',0),
-('6', '健身操', '50', '15',0),
-('7', '瑜伽', '100', '15',0);
-
-
-DROP TABLE IF EXISTS `user_reservation`;
 CREATE TABLE gym.`user_reservation` (
 `id` int(20) NOT NULL AUTO_INCREMENT,
 `sub_id` int(20) NOT NULL,
@@ -349,8 +342,6 @@ CREATE TABLE gym.`user_reservation` (
 `reservation_end_time` datetime DEFAULT NULL DEFAULT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
-
 
 #将会员表信息关联至用户表
 insert into gym.adminuser (adminName,adminPassword,permission)
