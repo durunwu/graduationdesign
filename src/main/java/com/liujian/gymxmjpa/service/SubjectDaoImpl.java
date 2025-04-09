@@ -1,5 +1,7 @@
 package com.liujian.gymxmjpa.service;
 
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -13,6 +15,7 @@ import java.util.Map;
  * @Author: LiuJian
  * @Date: 2020/4/8
  */
+@Slf4j
 @Service
 public class SubjectDaoImpl {
 
@@ -83,6 +86,35 @@ public class SubjectDaoImpl {
         }
 
         Long count=(Long) entityManager.createQuery(jpa).getSingleResult();
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("total",count);
+        map.put("rows",qu.getResultList());
+        return map;
+    }
+
+    public Map<String,Object> subQuery(Map<String, Object> map1) {
+        //分页
+        String jpal="from UserSubject where 1=1";
+        jpal=jpal+"and admin_id = " + map1.get("adminId");
+        if(map1.get("subname")!=null && !map1.get("subname").equals("")){
+            jpal=jpal+" and sub_name like '%"+map1.get("subname")+"%'";
+        }
+        Query qu=entityManager.createQuery(jpal);
+        log.info("查询结果:"+ JSON.toJSONString(qu.getResultList()));
+
+        //起始页书
+        qu.setFirstResult((int)map1.get("qi"));
+        //结束页数
+        qu.setMaxResults((int)map1.get("shi"));
+
+        //查询多少条数据
+        String jpa="select count(s) from UserSubject s where 1=1";
+        jpa=jpa+"and admin_id = " + map1.get("adminId");
+        if(map1.get("subname")!=null && !map1.get("subname").equals("")){
+            jpa=jpa+" and sub_name like '%"+map1.get("subname")+"%'";
+        }
+        Long count=(Long) entityManager.createQuery(jpa).getSingleResult();
+
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("total",count);
         map.put("rows",qu.getResultList());

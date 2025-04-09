@@ -22,29 +22,27 @@
     <script>
         $(function () {
             $('#table').bootstrapTable({
-                url:'${pageContext.request.contextPath}/subject/query',
+                url:'${pageContext.request.contextPath}/subject/subQuery',
                 method:'post',
                 contentType:"application/x-www-form-urlencoded",
                 columns:[
                     // { field:'subId',title:'课程编号',sortable: true},
-                    { field:'subname',title:'课程名称',sortable: true},
-                    { field:'sellingPrice',title:'预约开始时间',sortable: true},
-                    { field:'sellingPrice',title:'预约结束时间',sortable: true},
-                    {
-                        field:'xx',title:'预约更新',
-                        formatter : function(value, row, index) {
-                            return "<a href='javascript:upd1("+row.subId+")' class='glyphicon glyphicon-pencil'></a>";
-                            // return "<a title='删除' href='javascript:del1("
-                            //     + row.subId + ")'><span class='glyphicon glyphicon-trash'></span></a> | <a href='javascript:upd1("+row.subId+")' class='glyphicon glyphicon-pencil'></a>";
-                        }
-
-                    },
+                    { field:'sub_name',title:'课程名称',sortable: true},
+                    { field:'reservation_start_time',title:'预约开始时间',sortable: true},
+                    { field:'reservation_end_time',title:'预约结束时间',sortable: true},
+                    // {
+                    //     field:'xx',title:'预约更新',
+                    //     formatter : function(value, row, index) {
+                    //         return "<a href='javascript:upd1("+row.subId+")' class='glyphicon glyphicon-pencil'></a>";
+                    //         // return "<a title='删除' href='javascript:del1("
+                    //         //     + row.subId + ")'><span class='glyphicon glyphicon-trash'></span></a> | <a href='javascript:upd1("+row.subId+")' class='glyphicon glyphicon-pencil'></a>";
+                    //     }
+                    //
+                    // },
                     {
                         field:'xx',title:'取消预约',
                         formatter : function(value, row, index) {
                             return "<a href='javascript:upd1("+row.subId+")' class='glyphicon glyphicon-remove'></a>";
-                            // return "<a title='删除' href='javascript:del1("
-                            //     + row.subId + ")'><span class='glyphicon glyphicon-trash'></span></a> | <a href='javascript:upd1("+row.subId+")' class='glyphicon glyphicon-pencil'></a>";
                         }
 
                     }
@@ -105,9 +103,9 @@
         //查询
         function search(){
             var opt=$('#table').bootstrapTable('getOptions');
-            var subjectid=$('#cardid').val();
+            var subName=$('#subName').val();
 
-            $.post("${pageContext.request.contextPath}/subject/query",{"pageSize":opt.pageSize,"pageNumber":opt.pageNumber,"subname":subjectid},function (releset) {
+            $.post("${pageContext.request.contextPath}/subject/subQuery",{"subname":subName,"pageNumber":opt.pageNumber,"pageSize":opt.pageSize},function (releset) {
                 $("#table").bootstrapTable('load',releset) ;
             })
         }
@@ -239,12 +237,10 @@
     <div class="panel-body">
         <form class="form-inline">
             <div  class="input-group input-daterange">
-                <label for="cardid" class="control-label">课程名称:</label>
-                <input id="cardid" type="text" class="form-control">
+                <label for="subName" class="control-label">课程名称:</label>
+                <input id="subName" type="text" class="form-control">
             </div>
             <button onclick="search()" type="button" class="btn btn-default" style="margin-top: 20px" >查询</button>
-<%--             <button type="button" class="btn btn-default" onclick="kong()" style="float: right; margin-top: 20px" data-toggle="modal" data-target="#myModal">--%>
-<%--                 <span class="glyphicon glyphicon-plus"></span>添加课程</button>--%>
         </form>
     </div>
 

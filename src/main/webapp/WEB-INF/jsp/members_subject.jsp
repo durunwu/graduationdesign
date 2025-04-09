@@ -208,6 +208,27 @@
             }) ;
         }
 
+        <%--function saveReservation(){--%>
+        <%--    if(!validateUpd()){--%>
+        <%--        return;--%>
+        <%--    }--%>
+        <%--    var opt=$('#table').bootstrapTable('getOptions');--%>
+        <%--    var subjectid=$('#cardid').val();--%>
+        <%--    var id =  $('#id').val();--%>
+        <%--    var name = $("#xgname").val();--%>
+        <%--    var money= $("#xgmoney").val();--%>
+        <%--    var start_time= $("#xgstart_time").val();--%>
+        <%--    var end_time= $("#xgend_time").val();--%>
+        <%--    $("#myModal2").modal("hide") ;--%>
+        <%--    $.post('${pageContext.request.contextPath}/subject/saveReservation',{'subId':id,'subname':name,'sellingPrice':money,'reservation_start_time':start_time,'reservation_end_time':end_time},function(data){--%>
+        <%--        $.post("${pageContext.request.contextPath}/subject/subjectReservationQuery",{"pageSize":opt.pageSize,"pageNumber":opt.pageNumber,"subname":subjectid},function (releset) {--%>
+        <%--            $("#table").bootstrapTable('load',releset) ;--%>
+        <%--        })--%>
+        <%--        $("#table").bootstrapTable("load",data) ;--%>
+        <%--        swal("保存！", "保存成功",--%>
+        <%--            "success");--%>
+        <%--    },"json").contentType("application/json"); ;--%>
+        <%--}--%>
         function saveReservation(){
             if(!validateUpd()){
                 return;
@@ -217,17 +238,37 @@
             var id =  $('#id').val();
             var name = $("#xgname").val();
             var money= $("#xgmoney").val();
-            var start_time= $("#xgstart_time").val();
-            var end_time= $("#xgend_time").val();
-            $("#myModal2").modal("hide") ;
-            $.post('${pageContext.request.contextPath}/subject/saveReservation',{'subId':id,'subname':name,'sellingPrice':money,'reservation_start_time':start_time,'reservation_end_time':end_time},function(data){
-                $.post("${pageContext.request.contextPath}/subject/saveReservation",{"pageSize":opt.pageSize,"pageNumber":opt.pageNumber,"subname":subjectid},function (releset) {
-                    $("#table").bootstrapTable('load',releset) ;
-                })
-                $("#table").bootstrapTable("load",data) ;
-                swal("修改！", "修改成功",
-                    "success");
-            }) ;
+            var start_time= $("#start_time").val();
+            var end_time= $("#end_time").val();
+
+            // 校验 start_time 必须小于 end_time
+            if (start_time && end_time) {
+                var startDate = new Date(start_time);
+                var endDate = new Date(end_time);
+                if (startDate >= endDate) {
+                    swal("错误", "开始时间必须早于结束时间", "error");
+                    return;
+                }
+            }
+
+            // 将日期时间转换为时间戳
+            var start_timestamp = new Date(start_time).getTime();
+            var end_timestamp = new Date(end_time).getTime();
+            $("#myModal2").modal("hide");
+            var dataToSend = {'subId':id,'subName':name,'sellingPrice':money,'reservationStartTime':start_timestamp,'reservationEndTime':end_timestamp};
+            $.ajax({
+                type: "POST",
+                url: '${pageContext.request.contextPath}/subject/saveReservation',
+                contentType: "application/json",
+                data: JSON.stringify(dataToSend),
+                success: function(data) {
+                    $.post("${pageContext.request.contextPath}/subject/subjectReservationQuery",{"pageSize":opt.pageSize,"pageNumber":opt.pageNumber,"subname":subjectid},function (releset) {
+                        $("#table").bootstrapTable('load',releset);
+                    });
+                    $("#table").bootstrapTable("load",data);
+                    swal("保存！", "保存成功", "success");
+                }
+            });
         }
 
         function validateUpd() {
@@ -346,21 +387,25 @@
                                 <input type="text"style="margin-top: 10px" class="form-control" id="xgmoney" parsley-trigger="change" parsley-required="true" parsley-minlength="4" parsley-type="email" parsley-validation-minlength="1">
                             </div>
                         </div>
-                        <div class="mb-4 flex items-center">
-                            <label for="start_time" class="w-1/3 text-gray-700">开始时间</label>
-                            <input type="datetime-local" class="w-2/3 border border-gray-300 p-2 rounded" id="start_time" parsley-trigger="change"
-                                   parsley-required="true">
+                        <div class="form-group">
+                            <label for="start_time" class="col-sm-4 control-label" style="margin-top: 10px">开始时间</label>
+                            <div class="col-sm-8">
+                                <input type="datetime-local" style="margin-top: 10px" class="form-control" id="start_time"
+                                       parsley-trigger="change" parsley-required="true">
+                            </div>
                         </div>
-                        <div class="mb-4 flex items-center">
-                            <label for="end_time" class="w-1/3 text-gray-700">结束时间</label>
-                            <input type="datetime-local" class="w-2/3 border border-gray-300 p-2 rounded" id="end_time" parsley-trigger="change"
-                                   parsley-required="true">
+                        <div class="form-group">
+                            <label for="end_time" class="col-sm-4 control-label" style="margin-top: 10px">结束时间</label>
+                            <div class="col-sm-8">
+                                <input type="datetime-local" style="margin-top: 10px" class="form-control" id="end_time"
+                                       parsley-trigger="change" parsley-required="true">
+                            </div>
                         </div>
                     </form>
                     &nbsp;
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button onclick="saveReservation()"  type="button" class="btn btn-primary">修改</button>
+                        <button onclick="saveReservation()"  type="button" class="btn btn-primary">保存</button>
                     </div>
                 </div>
             </div>

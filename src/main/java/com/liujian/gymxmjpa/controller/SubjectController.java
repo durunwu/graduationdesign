@@ -1,9 +1,17 @@
 package com.liujian.gymxmjpa.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liujian.gymxmjpa.dao.PrivateCoachInfoDao;
 import com.liujian.gymxmjpa.dao.ReservationSubjectDao;
 import com.liujian.gymxmjpa.dao.SubjectDao;
 import com.liujian.gymxmjpa.entity.*;
+import com.liujian.gymxmjpa.mapper.UserReservationMapper;
 import com.liujian.gymxmjpa.service.SubjectDaoImpl;
 import com.liujian.gymxmjpa.service.UserReservationService;
 import com.liujian.gymxmjpa.util.ThreadLocalHolder;
@@ -15,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -102,19 +111,69 @@ public class SubjectController {
         return subjectDaoImpl.subjectReservationQuery(map1);
     }
 
+    @Autowired
+    private UserReservationService userReservationService;
+
     @Resource
-    UserReservationService userReservationService;
+    UserReservationMapper userReservationMapper;
+
+    @RequestMapping("/subQuery")
+    @ResponseBody
+    public Map<String,Object> subQuery(String subname, int pageNumber, int pageSize, HttpSession httpSession){
+        log.info("预约课程subname =>{}",subname);
+        // 获取当前管理员用户
+        Adminuser adminuser = (Adminuser) httpSession.getAttribute("user");
+        if (adminuser == null) {
+            adminuser = ThreadLocalHolder.getCurrentUser();
+        }
+        long adminId = adminuser.getAdminId();
+        log.info("预约课程adminId =>{}",adminId);
+
+
+        Map<String,Object> map1=new HashMap<String,Object>();
+        map1.put("subname",subname);
+        map1.put("adminId",adminId);
+        map1.put("qi",(pageNumber-1)*pageSize);
+        map1.put("shi",pageSize);
+        return subjectDaoImpl.subQuery(map1);
+//        List<UserReservation> userReservations = userReservationMapper.selectData(subname,adminId);
+//        log.info("查询结果 =>{}",JSON.toJSONString(userReservations));
+//        Integer total = userReservationMapper.selectDataPage(subname,adminId,pageNumber,pageSize);
+//        if (null == total) total = 0;
+//        // 封装结果
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("total", total);
+//        map.put("rows", userReservations);
+//        return map;
+
+
+
+    }
+
+
 
     /**
      * 保存预约课程
      */
     @RequestMapping("/saveReservation")
-    public void saveReservation(@RequestBody UserReservation userReservation,HttpSession httpSession){
-        log.info("预约课程 =>"+userReservation.getSubname());
+    public void saveReservation(@RequestBody UserReservation userReservation, HttpSession httpSession){
+        log.info("预约课程保存 =>{}",JSON.toJSONString(userReservation));
         Adminuser adminuser=(Adminuser) httpSession.getAttribute("user");
-        userReservation.setAdminId(adminuser.getAdminId());
+        if(adminuser == null){
+            adminuser = ThreadLocalHolder.getCurrentUser();
+        }
+        log.info("adminuser:{}",JSON.toJSONString(adminuser));
+        userReservation.setAdminId((int) adminuser.getAdminId());
         userReservationService.save(userReservation);
+
+        //todo 更新已预约人数
     }
+
+//    @RequestMapping("/count")
+//    public Map<String,Object> subjectReservationQuery(String subname){
+//        log.info("课程查询总数 =>{}",subname);
+//        return  subjectDaoImpl.count(subname);
+//    }
 
     /**
      * @Description: 课程管理-根据课程id删除课程

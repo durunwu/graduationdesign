@@ -338,11 +338,11 @@ INSERT INTO `subject_reservation` VALUES ('1', '普拉提', '100', '15',0),
 
 
 DROP TABLE IF EXISTS `user_reservation`;
-CREATE TABLE `user_reservation` (
-   `subId` int(20) NOT NULL AUTO_INCREMENT,
-   `adminId` int(20) NOT NULL,
-   `subname` varchar(20) DEFAULT NULL,
-   `reservation_start_time` datetime DEFAULT NULL DEFAULT NULL,
-   `reservation_end_time` datetime DEFAULT NULL DEFAULT NULL,
-   PRIMARY KEY (`subId`)
+CREATE TABLE gym.`user_reservation` (
+    `sub_id` int(20) NOT NULL AUTO_INCREMENT,
+    `admin_id` int(20) NOT NULL,
+    `sub_name` varchar(20) DEFAULT NULL,
+    `reservation_start_time` datetime DEFAULT NULL DEFAULT NULL,
+    `reservation_end_time` datetime DEFAULT NULL DEFAULT NULL,
+    PRIMARY KEY (`sub_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;

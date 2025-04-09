@@ -3,6 +3,10 @@ package com.liujian.gymxmjpa.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liujian.gymxmjpa.entity.UserReservation;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.sql.Wrapper;
+import java.util.List;
 
 /**
 * @author durun
@@ -12,6 +16,10 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface UserReservationMapper extends BaseMapper<UserReservation> {
+    // 如果有自定义方法，确保其存在
+    List<UserReservation> selectData(@Param("subname") String subname, @Param("adminId") long adminId);
+
+    Integer selectDataPage(@Param("subname") String subname, @Param("adminId") long adminId, @Param("pageNumber") int pageNumber,@Param("pageSize") int pageSize);
 
 }
 

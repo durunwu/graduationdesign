@@ -5,15 +5,42 @@
 <mapper namespace="com.liujian.gymxmjpa.mapper.UserReservationMapper">
 
     <resultMap id="BaseResultMap" type="com.liujian.gymxmjpa.entity.UserReservation">
-            <id property="subId" column="subId" jdbcType="INTEGER"/>
-            <result property="adminId" column="adminId" jdbcType="INTEGER"/>
-            <result property="subname" column="subname" jdbcType="VARCHAR"/>
-            <result property="reservation_start_time" column="reservation_start_time" jdbcType="TIMESTAMP"/>
-            <result property="reservation_end_time" column="reservation_end_time" jdbcType="TIMESTAMP"/>
+            <id property="subId" column="sub_id" jdbcType="INTEGER"/>
+            <result property="adminId" column="admin_id" jdbcType="INTEGER"/>
+            <result property="subName" column="sub_name" jdbcType="VARCHAR"/>
+            <result property="reservationStartTime" column="reservation_start_time" jdbcType="TIMESTAMP"/>
+            <result property="reservationEndTime" column="reservation_end_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        subId,adminId,subname,
+        sub_id,admin_id,sub_name,
         reservation_start_time,reservation_end_time
     </sql>
+
+    <!-- 添加 insert 语句 -->
+    <insert id="insert" parameterType="com.liujian.gymxmjpa.entity.UserReservation">
+        insert into user_reservation (
+        <include refid="Base_Column_List"/>
+        ) values (
+        #{subId}, #{adminId}, #{subName}, #{reservationStartTime}, #{reservationEndTime}
+        )
+    </insert>
+
+    <select id="selectData" resultType="com.liujian.gymxmjpa.entity.UserReservation">
+        select * from user_reservation
+        where admin_id = #{adminId}
+        <if test="subname != null and subname != ''">
+            AND sub_name like concat('%',#{subname},'%')
+        </if>
+        AND admin_id = #{adminId}
+    </select>
+    <select id="selectDataPage" resultType="java.lang.Integer">
+        select count(*) from user_reservation
+        where admin_id = #{adminId}
+        <if test="subname != null and subname != ''">
+            AND sub_name like concat('%',#{subname},'%')
+        </if>
+        limit #{pageNumber},#{pageSize}
+    </select>
+
 </mapper>
