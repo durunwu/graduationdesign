@@ -296,10 +296,10 @@
                     console.log('jqXHR:', jqXHR);
                     console.log('textStatus:', textStatus);
                     console.log('errorThrown:', errorThrown);
-                    let errorMessage = jqXHR.responseJSON.message;
+                    let errorMessage;
                     if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
                         errorMessage = jqXHR.responseJSON.message;
-                    } else if (jqXHR.status === 404) {
+                    } else if (jqXHR.status == 404) {
                         swal("执行成功","", "success");
                     } else if (textStatus === 'error' && jqXHR.status === 500) {
                         errorMessage = "服务器内部错误，请稍后重试。建议联系管理员查看服务器日志。";
@@ -308,11 +308,12 @@
                     } else {
                         errorMessage = `请求出错：${textStatus}，错误信息：${errorThrown}`;
                     }
-                    if(errorMessage === "/subject/saveReservation.jsp") {
-                        swal.fire("执行成功", "", "success");
+                    if(errorMessage === '/subject/saveReservation.jsp') {
+                        swal("执行成功", "", "success");
+
+                        return;
                     }
                     swal(errorMessage,"", "error");
-
                 }
             });
 
