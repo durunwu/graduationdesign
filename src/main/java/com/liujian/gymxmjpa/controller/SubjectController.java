@@ -11,8 +11,10 @@ import com.liujian.gymxmjpa.dao.PrivateCoachInfoDao;
 import com.liujian.gymxmjpa.dao.ReservationSubjectDao;
 import com.liujian.gymxmjpa.dao.SubjectDao;
 import com.liujian.gymxmjpa.entity.*;
+import com.liujian.gymxmjpa.mapper.SubjectReservationMapper;
 import com.liujian.gymxmjpa.mapper.UserReservationMapper;
 import com.liujian.gymxmjpa.service.SubjectDaoImpl;
+import com.liujian.gymxmjpa.service.SubjectReservationService;
 import com.liujian.gymxmjpa.service.UserReservationService;
 import com.liujian.gymxmjpa.util.ThreadLocalHolder;
 import lombok.extern.slf4j.Slf4j;
@@ -151,12 +153,17 @@ public class SubjectController {
     }
 
 
+    @Autowired
+    SubjectReservationService subjectReservationService;
+
+    @Autowired
+    SubjectReservationMapper subjectReservationMapper;
 
     /**
      * 保存预约课程
      */
     @RequestMapping("/saveReservation")
-    public void saveReservation(@RequestBody UserReservation userReservation, HttpSession httpSession){
+    public void saveReservation(@RequestBody UserReservation userReservation, HttpSession httpSession) throws RuntimeException{
         log.info("预约课程保存 =>{}",JSON.toJSONString(userReservation));
         Adminuser adminuser=(Adminuser) httpSession.getAttribute("user");
         if(adminuser == null){
@@ -166,7 +173,22 @@ public class SubjectController {
         userReservation.setAdminId((int) adminuser.getAdminId());
         userReservationService.save(userReservation);
 
+
+
+        //校验预约人数
+        Integer max = subjectReservationMapper.getMax(userReservation.getSubId());
+        Integer alreadyNum = subjectReservationMapper.getAlreadyNum(userReservation.getSubId());
+        if (alreadyNum >= max) {
+            log.info("当前时段课程已约满");
+            throw new RuntimeException("当前课程已约满");
+        }
+
+
+
         //todo 更新已预约人数
+        subjectReservationMapper.updateNum(userReservation.getSubId());
+
+
     }
 
 //    @RequestMapping("/count")

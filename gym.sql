@@ -7,17 +7,19 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `adminuser`;
 CREATE TABLE `adminuser` (
-  `adminId` int(20) NOT NULL AUTO_INCREMENT,
-  `adminName` varchar(20) DEFAULT NULL,
-  `adminPassword` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`adminId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+`adminId` int(20) NOT NULL AUTO_INCREMENT,
+`adminName` varchar(20) DEFAULT NULL,
+`adminPassword` varchar(256) DEFAULT NULL,
+`permission` varchar(100) NOT NULL,
+PRIMARY KEY (`adminId`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adminuser
 -- ----------------------------
-INSERT INTO `adminuser` VALUES ('1', 'admin', '0192023a7bbd73250516f069df18b500');
-INSERT INTO `adminuser` VALUES ('7', 'liujian', '0192023a7bbd73250516f069df18b500');
+INSERT INTO `adminuser` VALUES ('1', 'admin', '0192023a7bbd73250516f069df18b500','1');
+INSERT INTO `adminuser` VALUES ('2', 'member', '0192023a7bbd73250516f069df18b500','2');
+INSERT INTO `adminuser` VALUES ('2', 'coach', '0192023a7bbd73250516f069df18b500','3');
 
 -- ----------------------------
 -- Table structure for chongzhi
@@ -339,10 +341,11 @@ INSERT INTO `subject_reservation` VALUES ('1', '普拉提', '100', '15',0),
 
 DROP TABLE IF EXISTS `user_reservation`;
 CREATE TABLE gym.`user_reservation` (
-    `sub_id` int(20) NOT NULL AUTO_INCREMENT,
-    `admin_id` int(20) NOT NULL,
-    `sub_name` varchar(20) DEFAULT NULL,
-    `reservation_start_time` datetime DEFAULT NULL DEFAULT NULL,
-    `reservation_end_time` datetime DEFAULT NULL DEFAULT NULL,
-    PRIMARY KEY (`sub_id`)
+`id` int(20) NOT NULL AUTO_INCREMENT,
+`sub_id` int(20) NOT NULL,
+`admin_id` int(20) NOT NULL,
+`sub_name` varchar(20) DEFAULT NULL,
+`reservation_start_time` datetime DEFAULT NULL DEFAULT NULL,
+`reservation_end_time` datetime DEFAULT NULL DEFAULT NULL,
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;

@@ -110,11 +110,12 @@
             var subjectid=$('#cardid').val();
             var name=$("#name").val();
             var money = $("#money").val();
+            var num = $("#num").val();
             $("#myModal").modal("hide") ;
             $.post("${pageContext.request.contextPath}/subject/count",{"subname":name},function (releset) {
                 $("#table").bootstrapTable('load',releset) ;
                 if(releset<1){
-                    $.post('${pageContext.request.contextPath}/subject/add',{'subname':name,'sellingPrice':money},function(data){
+                    $.post('${pageContext.request.contextPath}/subject/add',{'subname':name,'sellingPrice':money,'subjectContainNum':num},function(data){
                         $("#table").bootstrapTable("load",data) ;
                         $.post("${pageContext.request.contextPath}/subject/query",{"pageSize":opt.pageSize,"pageNumber":opt.pageNumber,"subname":subjectid},function (releset) {
                             $("#table").bootstrapTable('load',releset) ;
@@ -264,6 +265,12 @@
                             <label for="money" class="col-sm-4 control-label"style="margin-top: 10px">费用</label>
                             <div class="col-sm-8">
                                 <input type="text"style="margin-top: 10px" class="form-control" id="money" parsley-trigger="change" parsley-required="true" parsley-minlength="4" parsley-type="email" parsley-validation-minlength="1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="num" class="col-sm-4 control-label"style="margin-top: 10px">课程可容量人数</label>
+                            <div class="col-sm-8">
+                                <input type="text"style="margin-top: 10px" class="form-control" id="num" parsley-trigger="change" parsley-required="true" parsley-minlength="4" parsley-type="email" parsley-validation-minlength="1">
                             </div>
                         </div>
                     </form>

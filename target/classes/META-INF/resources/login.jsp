@@ -32,7 +32,7 @@
         
         <form method="post" class="layui-form" action="${pageContext.request.contextPath}/dl/yz">
             <span style="color: red;">${msg}</span>
-            <span style="color: red;">${msg}</span>
+<%--            <span style="color: red;">${msg}</span>--%>
 
             <select name="type" lay-verify="required" class="layui-input">
                 <option >请选择用户类型</option>

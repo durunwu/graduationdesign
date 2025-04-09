@@ -19,7 +19,7 @@ public class ReservationSubject {
   @GeneratedValue(strategy =  GenerationType.IDENTITY)
   private long subId;
   private String subname;
-  private double sellingPrice;
-  private double subjectContainNum;
-  private double alreadyReservationNum;
+  private Double sellingPrice;
+  private Double subjectContainNum;
+  private Double alreadyReservationNum;
 }

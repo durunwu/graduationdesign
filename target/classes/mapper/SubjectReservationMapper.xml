@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liujian.gymxmjpa.mapper.SubjectReservationMapper">
+
+    <resultMap id="BaseResultMap" type="com.liujian.gymxmjpa.entity.SubjectReservation">
+            <id property="subId" column="subId" jdbcType="INTEGER"/>
+            <result property="subname" column="subname" jdbcType="VARCHAR"/>
+            <result property="sellingPrice" column="sellingPrice" jdbcType="DOUBLE"/>
+            <result property="subjectContainNum" column="subjectContainNum" jdbcType="DOUBLE"/>
+            <result property="alreadyReservationNum" column="alreadyReservationNum" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        subId,subname,sellingPrice,
+        subjectContainNum,alreadyReservationNum
+    </sql>
+    <update id="updateNum">
+        update subject_reservation set alreadyReservationNum = alreadyReservationNum + 1 where subId = #{subId}
+    </update>
+    <select id="getMax" resultType="java.lang.Integer">
+        select subjectContainNum from subject_reservation where subId = #{subId};
+    </select>
+    <select id="getAlreadyNum" resultType="java.lang.Integer">
+        select alreadyReservationNum from subject_reservation where subId = #{subId};
+    </select>
+</mapper>

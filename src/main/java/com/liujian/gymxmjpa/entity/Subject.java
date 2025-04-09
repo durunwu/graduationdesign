@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @Date: 2020/4/3
  */
 @Entity
-@Table(name = "subject")
+@Table(name = "subject_reservation")
 @Getter
 @Setter
 public class Subject {
@@ -19,7 +19,8 @@ public class Subject {
   @GeneratedValue(strategy =  GenerationType.IDENTITY)
   private long subId;
   private String subname;
-  private double sellingPrice;
+  private Double sellingPrice;
+  private Double subjectContainNum;
  /* @JoinColumn
   private List<PrivateCoachInfo> privateCoachInfos;*/
 // @OneToMany

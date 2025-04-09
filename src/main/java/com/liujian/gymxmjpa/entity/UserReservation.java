@@ -19,7 +19,11 @@ public class UserReservation implements Serializable {
     /**
      * 
      */
+
     @TableId(type = IdType.AUTO)
+    @TableField("id")
+    private Integer Id;
+
     @TableField("sub_id")
     private Integer subId;
 

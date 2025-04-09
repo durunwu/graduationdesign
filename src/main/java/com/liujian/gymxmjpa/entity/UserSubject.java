@@ -19,9 +19,10 @@ import java.util.Date;
 public class UserSubject {
   @Id
   @GeneratedValue(strategy =  GenerationType.IDENTITY)
+  private long id;
   private long sub_id;
   private long admin_id;
   private String sub_name;
-  private Date reservation_start_time;
-  private Date reservation_end_time;
+  private String reservation_start_time;
+  private String reservation_end_time;
 }

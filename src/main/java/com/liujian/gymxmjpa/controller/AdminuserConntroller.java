@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,12 +62,24 @@ public class AdminuserConntroller {
             ThreadLocalHolder.setCurrentUser(a);
             if (type.equals("members")) {
                 //会员
+                if (!Objects.equals("2",a.getPermission())) {
+                    model.addAttribute("msg","权限不足");
+                    return "login";
+                }
                 path = "WEB-INF/jsp/members_index";
             } else if (type.equals("coaches")) {
-                //教练
+                //教练  教练可以登陆管理员账号
+                if (!Objects.equals("3",a.getPermission()) && !Objects.equals("1",a.getPermission())) {
+                    model.addAttribute("msg","权限不足");
+                    return "login";
+                }
                 path = "WEB-INF/jsp/coaches_index";
             } else if (type.equals("administrators")) {
                 //管理员
+                if (!Objects.equals("1",a.getPermission())) {
+                    model.addAttribute("msg","权限不足");
+                    return "login";
+                }
                 path = "WEB-INF/jsp/index";
             }
         }catch (UnknownAccountException e){
