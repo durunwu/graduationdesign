@@ -131,7 +131,6 @@ public class SubjectController {
         long adminId = adminuser.getAdminId();
         log.info("预约课程adminId =>{}",adminId);
 
-
         Map<String,Object> map1=new HashMap<String,Object>();
         map1.put("subname",subname);
         map1.put("adminId",adminId);
@@ -171,23 +170,22 @@ public class SubjectController {
         }
         log.info("adminuser:{}",JSON.toJSONString(adminuser));
         userReservation.setAdminId((int) adminuser.getAdminId());
-        userReservationService.save(userReservation);
-
-
 
         //校验预约人数
         Integer max = subjectReservationMapper.getMax(userReservation.getSubId());
+        log.info("max:{}",max);
         Integer alreadyNum = subjectReservationMapper.getAlreadyNum(userReservation.getSubId());
+        log.info("已预约人数:{}",alreadyNum);
         if (alreadyNum >= max) {
             log.info("当前时段课程已约满");
             throw new RuntimeException("当前课程已约满");
+        } else if (alreadyNum == null) {
+            log.info("当前时段课程已约满");
+            throw new RuntimeException("当前课程已约满");
         }
-
-
-
-        //todo 更新已预约人数
+        userReservationService.save(userReservation);
+        //更新已预约人数
         subjectReservationMapper.updateNum(userReservation.getSubId());
-
 
     }
 
