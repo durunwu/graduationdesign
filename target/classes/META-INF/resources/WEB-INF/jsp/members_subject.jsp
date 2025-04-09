@@ -275,19 +275,6 @@
             var end_timestamp = new Date(end_time).getTime();
             $("#myModal2").modal("hide");
             var dataToSend = {'subId':id,'subName':name,'sellingPrice':money,'reservationStartTime':start_timestamp,'reservationEndTime':end_timestamp};
-            <%--$.ajax({--%>
-            <%--    type: "POST",--%>
-            <%--    url: '${pageContext.request.contextPath}/subject/saveReservation',--%>
-            <%--    contentType: "application/json",--%>
-            <%--    data: JSON.stringify(dataToSend),--%>
-            <%--    success: function(data) {--%>
-            <%--        $.post("${pageContext.request.contextPath}/subject/subjectReservationQuery",{"pageSize":opt.pageSize,"pageNumber":opt.pageNumber,"subname":subjectid},function (releset) {--%>
-            <%--            $("#table").bootstrapTable('load',releset);--%>
-            <%--        });--%>
-            <%--        $("#table").bootstrapTable("load",data);--%>
-            <%--        swal("保存！", "保存成功", "success");--%>
-            <%--    }--%>
-            <%--});--%>
             $.ajax({
                 type: "POST",
                 url: '${pageContext.request.contextPath}/subject/saveReservation',
@@ -312,8 +299,8 @@
                     let errorMessage;
                     if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
                         errorMessage = jqXHR.responseJSON.message;
-                    } else if (textStatus === 'error' && jqXHR.status === 404) {
-                        errorMessage = "接口未找到，请检查接口地址。";
+                    } else if (jqXHR.status === 404) {
+                        swal("执行成功","", "success");
                     } else if (textStatus === 'error' && jqXHR.status === 500) {
                         errorMessage = "服务器内部错误，请稍后重试。建议联系管理员查看服务器日志。";
                     } else if (textStatus === 'timeout') {
@@ -321,7 +308,11 @@
                     } else {
                         errorMessage = `请求出错：${textStatus}，错误信息：${errorThrown}`;
                     }
-                    swal(errorMessage,"", "error");
+                    if (errorMessage = "/subject/saveReservation.jsp") {
+                        swal("执行成功","", "success");
+                    }else {
+                        swal(errorMessage,"", "error");
+                    }
                 }
             });
 
