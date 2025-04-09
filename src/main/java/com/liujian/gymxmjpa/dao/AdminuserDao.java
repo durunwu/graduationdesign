@@ -27,4 +27,7 @@ public interface AdminuserDao extends JpaRepository<Adminuser,Long> {
     @Query(value = "insert into adminuser (adminName,adminPassword,permission) values (:adminName,:adminPassword,:permission)",nativeQuery = true)
     void createUser(@Param("adminName") String adminName,@Param("adminPassword") String adminPassword,@Param("permission") String permission) ;
 
+    @Modifying
+    @Query(value = "delete from adminuser where adminName =:memberName and permission='2' ",nativeQuery = true)
+    void deleteFromMemberName(@Param("memberName") String memberName);
 }

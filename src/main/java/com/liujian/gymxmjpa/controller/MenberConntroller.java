@@ -2,12 +2,14 @@ package com.liujian.gymxmjpa.controller;
 
 
 
+import com.liujian.gymxmjpa.dao.AdminuserDao;
 import com.liujian.gymxmjpa.dao.MenberDao;
 import com.liujian.gymxmjpa.dao.chongzhiDao;
 import com.liujian.gymxmjpa.service.MenberDaoImpl;
 import com.liujian.gymxmjpa.entity.Chongzhi;
 import com.liujian.gymxmjpa.entity.Member;
 import com.liujian.gymxmjpa.entity.Membertype;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +19,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @Description: 会员管理Controller控制层
  * @Author: LiuJian
  * @Date: 2020/4/6
  */
+@Slf4j
 @Controller
 @RequestMapping("/menber")
 public class MenberConntroller {
@@ -131,6 +135,9 @@ public class MenberConntroller {
         return menberDaoiImpl.cha(id);
     }
 
+    @Autowired
+    private AdminuserDao adminuserDao;
+
     /**
      * @Description: 会员管理-根据会员id删除
      * @Author: LiuJian
@@ -139,8 +146,13 @@ public class MenberConntroller {
     @RequestMapping("/delete")
     @ResponseBody
     public Map<String,Object> del(int memid){
+        log.info("会员id:{}",memid);
+
+        Member member=menberDao.findById((long) memid).get();
+        adminuserDao.deleteFromMemberName(member.getMemberName());
 
         menberDaoiImpl.del(memid);
+        log.info("删除会员信息成功");
         return query(0,"",5,1);
     }
 
