@@ -310,7 +310,7 @@
                     }
                     if (errorMessage = "/subject/saveReservation.jsp") {
                         swal("执行成功","", "success");
-                    }else {
+                    } else {
                         swal(errorMessage,"", "error");
                     }
                 }

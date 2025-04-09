@@ -249,10 +249,10 @@
     <!-- 中部结束 -->
     <!-- 底部开始 -->
     <div class="footer">
-        <div align="center" class="copyright">Copyright 刘建&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010602007158" style="display:inline-block;text-decoration:none;color: #fff;"><img src="/static/HTmoban/images/备案图标.png">京公网安备 11010602007158号</a>
+        <div align="center" class="copyright">Copyright 小周&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010602007158" style="display:inline-block;text-decoration:none;color: #fff;"><img src="/static/HTmoban/images/备案图标.png">京公网安备 12313</a>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <a style=" text-decoration: none; color: #fff;" href="http://www.beian.miit.gov.cn/" target="_blank">互联网ICP备案 京ICP备20017362号-1</a>
+            <a style=" text-decoration: none; color: #fff;" href="http://www.beian.miit.gov.cn/" target="_blank"> 京ICP备225555号-1</a>
         </div>
     </div>
     <!-- 底部结束 -->
