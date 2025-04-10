@@ -46,67 +46,67 @@
       <div id="side-nav">
         <ul id="nav">
             
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b8;</i>
-                    <cite>会员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="${pageContext.request.contextPath}/menber/jin">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
-                            
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="${pageContext.request.contextPath}/menber/jin2">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员到期</cite>
-                            
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe70b;</i>
-                            <cite>会员充值管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="${pageContext.request.contextPath}/menber/jin3">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员卡续卡</cite>
+<%--            <li>--%>
+<%--                <a href="javascript:;">--%>
+<%--                    <i class="iconfont">&#xe6b8;</i>--%>
+<%--                    <cite>会员管理</cite>--%>
+<%--                    <i class="iconfont nav_right">&#xe697;</i>--%>
+<%--                </a>--%>
+<%--                <ul class="sub-menu">--%>
+<%--                    <li>--%>
+<%--                        <a _href="${pageContext.request.contextPath}/menber/jin">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>会员列表</cite>--%>
+<%--                            --%>
+<%--                        </a>--%>
+<%--                    </li >--%>
+<%--                    <li>--%>
+<%--                        <a _href="${pageContext.request.contextPath}/menber/jin2">--%>
+<%--                            <i class="iconfont">&#xe6a7;</i>--%>
+<%--                            <cite>会员到期</cite>--%>
+<%--                            --%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                    <li>--%>
+<%--                        <a href="javascript:;">--%>
+<%--                            <i class="iconfont">&#xe70b;</i>--%>
+<%--                            <cite>会员充值管理</cite>--%>
+<%--                            <i class="iconfont nav_right">&#xe697;</i>--%>
+<%--                        </a>--%>
+<%--                        <ul class="sub-menu">--%>
+<%--                            <li>--%>
+<%--                                <a _href="${pageContext.request.contextPath}/menber/jin3">--%>
+<%--                                    <i class="iconfont">&#xe6a7;</i>--%>
+<%--                                    <cite>会员卡续卡</cite>--%>
 
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="${pageContext.request.contextPath}/menber/jin11">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员余额充值</cite>
-                                </a>
-                            </li>
-                            <li>
+<%--                                </a>--%>
+<%--                            </li >--%>
+<%--                            <li>--%>
+<%--                                <a _href="${pageContext.request.contextPath}/menber/jin11">--%>
+<%--                                    <i class="iconfont">&#xe6a7;</i>--%>
+<%--                                    <cite>会员余额充值</cite>--%>
+<%--                                </a>--%>
+<%--                            </li>--%>
+<%--                            <li>--%>
 
-                                <a _href="${pageContext.request.contextPath}/cz/jin">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>续费续卡记录</cite>
+<%--                                <a _href="${pageContext.request.contextPath}/cz/jin">--%>
+<%--                                    <i class="iconfont">&#xe6a7;</i>--%>
+<%--                                    <cite>续费续卡记录</cite>--%>
 
-                                </a>
-                            </li>
-                            <li>
+<%--                                </a>--%>
+<%--                            </li>--%>
+<%--                            <li>--%>
 
-                                <a _href="${pageContext.request.contextPath}/ktype/jin5">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>会员卡类型管理</cite>
+<%--                                <a _href="${pageContext.request.contextPath}/ktype/jin5">--%>
+<%--                                <i class="iconfont">&#xe6a7;</i>--%>
+<%--                                <cite>会员卡类型管理</cite>--%>
 
-                                 </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
+<%--                                 </a>--%>
+<%--                            </li>--%>
+<%--                        </ul>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </li>--%>
 <%--            <li>--%>
 <%--                <a href="javascript:;">--%>
 <%--                    <i class="iconfont">&#xe723;</i>--%>

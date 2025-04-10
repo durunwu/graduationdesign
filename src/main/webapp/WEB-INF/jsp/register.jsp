@@ -1,4 +1,4 @@
-
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -47,30 +47,6 @@
 
 
     </script>
-    <%--<script>--%>
-        <%--$(function  () {--%>
-            <%--layui.use('form', function(){--%>
-              <%--var form = layui.form;--%>
-
-              <%--// layer.msg('玩命卖萌中', function(){--%>
-              <%--//   //关闭后的操作--%>
-              <%--//   });--%>
-              <%--//监听提交--%>
-              <%--form.on('submit(login)', function(data){--%>
-                 <%--alert(888);--%>
-                <%--layer.msg(JSON.stringify(data.field),function(){--%>
-                    <%--location.href='${pageContext.request.contextPath}/dl/yz'--%>
-                <%--});--%>
-                <%--return false;--%>
-              <%--});--%>
-            <%--});--%>
-        <%--})--%>
-
-        <%----%>
-    <%--</script>--%>
-
-    
-    <!-- 底部结束 -->
 
 </body>
 </html>

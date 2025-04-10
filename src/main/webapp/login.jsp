@@ -1,4 +1,4 @@
-
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -33,7 +33,6 @@
         <form method="post" class="layui-form" action="${pageContext.request.contextPath}/dl/yz">
             <span style="color: red;">${msg}</span>
 <%--            <span style="color: red;">${msg}</span>--%>
-
             <select name="type" lay-verify="required" class="layui-input">
                 <option >请选择用户类型</option>
                 <option value="members">会员</option>
@@ -49,7 +48,7 @@
             <hr class="hr20" >
             <!-- 添加用户注册链接 -->
             <a href="${pageContext.request.contextPath}/register">用户注册</a>
-           <%-- <input class="layui-input" type="checkbox" name="ckbox">记住我--%>
+
         </form>
     </div>
     <script>
@@ -79,7 +78,7 @@
         <%----%>
     <%--</script>--%>
 
-    
+
     <!-- 底部结束 -->
     <div class="footer">
         <div align="center">
@@ -89,4 +88,14 @@
         </div>
     </div>
 </body>
+
+<!-- 引入 Layui 的 JS -->
+<script src="path/to/layui/layui.js"></script>
+<script>
+    // 初始化 Layui 表单组件
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render(); // 关键：重新渲染表单
+    });
+</script>
 </html>
