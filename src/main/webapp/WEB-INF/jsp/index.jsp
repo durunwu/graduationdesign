@@ -64,7 +64,6 @@
                         <a _href="${pageContext.request.contextPath}/menber/jin2">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员到期</cite>
-                            
                         </a>
                     </li>
                     <li>
@@ -78,7 +77,6 @@
                                 <a _href="${pageContext.request.contextPath}/menber/jin3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>会员卡续卡</cite>
-
                                 </a>
                             </li >
                             <li>

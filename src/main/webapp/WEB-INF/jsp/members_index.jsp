@@ -57,14 +57,14 @@
 <%--                        <a _href="${pageContext.request.contextPath}/menber/jin">--%>
 <%--                            <i class="iconfont">&#xe6a7;</i>--%>
 <%--                            <cite>会员列表</cite>--%>
-<%--                            --%>
+
 <%--                        </a>--%>
 <%--                    </li >--%>
 <%--                    <li>--%>
 <%--                        <a _href="${pageContext.request.contextPath}/menber/jin2">--%>
 <%--                            <i class="iconfont">&#xe6a7;</i>--%>
 <%--                            <cite>会员到期</cite>--%>
-<%--                            --%>
+
 <%--                        </a>--%>
 <%--                    </li>--%>
 <%--                    <li>--%>

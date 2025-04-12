@@ -116,6 +116,7 @@ public class ShiroConfig {
         map.put("/dl/yz","anon") ;
         map.put("/static/**","anon") ;
         map.put("/register","anon") ;
+        map.put("/user/register","anon") ;
         //取消认证
         map.put("/logout","logout") ;
 
