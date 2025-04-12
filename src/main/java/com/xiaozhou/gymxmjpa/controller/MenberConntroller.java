@@ -98,6 +98,11 @@ public class MenberConntroller {
     @RequestMapping("/query")
     @ResponseBody
     public Map<String,Object> query(int ktype,String hyname, int pageSize, int pageNumber){
+        log.info(">>会员列表-分页查询<<");
+        log.info("会员类型:{}",ktype);
+        log.info("会员名称:{}",hyname);
+        log.info("pageSize:{}",pageSize);
+        log.info("pageNumber:{}",pageNumber);
         Map<String,Object>  map1=new HashMap<String,Object>();
         map1.put("hyname",hyname);
         map1.put("ktype",ktype);
